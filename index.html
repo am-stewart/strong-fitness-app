@@ -89,5 +89,5 @@ function more(){document.getElementById("root").innerHTML=`<main><div class="tit
 function exportData(){let b=new Blob([JSON.stringify(S,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="strong-v2-backup.json";a.click()}
 function importData(f){if(!f)return;let r=new FileReader();r.onload=()=>{try{S=JSON.parse(r.result);save();location.reload()}catch(e){toast("Invalid backup")}};r.readAsText(f)}
 let deferred=null;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e});function install(){if(deferred){deferred.prompt();deferred=null}else toast("Use Add to Home Screen / Install in browser")}
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));page("home");
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"}).catch(()=>{}));page("home");
 </script></body></html>
